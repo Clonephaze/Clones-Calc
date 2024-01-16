@@ -20,7 +20,7 @@
             "purpose": "maskable"
         }
     ],
-    "start_url": "https://clonephaze.github.io/Clones-Calc/index.html",
+    "start_url": "/index.html",
     "theme_color": "#3a4764",
     "background_color": "#3a4764",
     "display": "standalone",
@@ -29,6 +29,18 @@
     "screenshots": [
         {
             "src": "assets/images/Install-Screenshot-mobile.png",
+            "sizes": "499x1080",
+            "type": "image/png",
+            "form-factor": "narrow"
+        },
+        {
+            "src": "assets/images/Install-Screenshot-mobile2.png",
+            "sizes": "499x1080",
+            "type": "image/png",
+            "form-factor": "narrow"
+        },
+        {
+            "src": "assets/images/Install-Screenshot-mobile3.png",
             "sizes": "499x1080",
             "type": "image/png",
             "form-factor": "narrow"
