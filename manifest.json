@@ -20,7 +20,7 @@
             "purpose": "maskable"
         }
     ],
-    "start_url": "/index.html",
+    "start_url": "https://clonephaze.github.io/Clones-Calc/index.html",
     "theme_color": "#3a4764",
     "background_color": "#3a4764",
     "display": "standalone",
