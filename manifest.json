@@ -18,22 +18,22 @@
     "background_color": "#3a4764",
     "display": "standalone",
     "orientation": "portrait",
-    "start_url": "/index.html",
+    "start_url": "https://clonephaze.github.io/Clones-Calc/index.html",
     "screenshots": [
         {
-            "src": "/assets/images/Install-Screenshot-mobile.png",
+            "src": "assets/images/Install-Screenshot-mobile.png",
             "sizes": "499x1080",
             "type": "image/png",
             "form-factor": "narrow"
         },
         {
-            "src": "/assets/images/Install-Screenshot.png",
+            "src": "assets/images/Install-Screenshot.png",
             "sizes": "1920x955",
             "type": "image/png",
             "form-factor": "wide"
         },
         {
-            "src": "/assets/images/Install-Screenshot2.png",
+            "src": "assets/images/Install-Screenshot2.png",
             "sizes": "1920x955",
             "type": "image/png",
             "form-factor": "wide"
