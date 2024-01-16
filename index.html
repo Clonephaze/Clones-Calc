@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+    <meta name="darkreader-lock" content="darkreader-lock">
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="preload" href="assets/fonts/LeagueSpartan-VariableFont_wght.ttf" as="font">  commented out, not really needed for this project-->
+    <title>Frontend Mentor | Calculator app</title>
+    <meta name="og:title" content="Calculator App" />
+    <meta name="og:image" content="https://raw.githubusercontent.com/Clonephaze/FEMChallenge-calculator-app-main/main/ChallengeComplete.png" />
+    <meta name="og:description" content="A challenge from Frontend Mentor, coded by Clonephaze" />
+    <meta name="og:url" content="https://clonephaze.github.io/FEMChallenge-calculator-app-main/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3a4864">
+    <meta name="apple-mobile-web-app-title" content="Calc">
+    <meta name="application-name" content="Calc">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#3a4764">
+</head>
+<body>
+    <header>
+        <h1>calc</h1>
+        <div class="theme-section">
+            <h2>THEME</h2>
+            <div class="toggle-container">
+                <p><span>1</span><span>2</span><span>3</span></p>
+                <div class="theme-toggle">
+                    <input aria-label="Light Theme" name="theme-switch" class="active" type="radio" checked id="theme-toggle-1" value="light">
+                    <label for="theme-toggle-1"></label>
+                    <input aria-label="Super Light Theme" name="theme-switch" type="radio" id="theme-toggle-2" value="extraLight">
+                    <label for="theme-toggle-2"></label>
+                    <input aria-label="Dark Theme" name="theme-switch" type="radio" id="theme-toggle-3" value="dark">
+                    <label for="theme-toggle-3"></label>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="screen" class="calc-screen" data-answered="false">0</div>
+        <div class="button-board">
+            <div class="btn-row">
+                <button id="7">7</button>
+                <button id="8">8</button>
+                <button id="9">9</button>
+                <button class="function-btn" id="delete">DEL</button>
+            </div>
+            <div class="btn-row">
+                <button id="4">4</button>
+                <button id="5">5</button>
+                <button id="6">6</button>
+                <button id="plus">+</button>
+            </div>
+            <div class="btn-row">
+                <button id="1">1</button>
+                <button id="2">2</button>
+                <button id="3">3</button>
+                <button id="minus">-</button>
+            </div>
+            <div class="btn-row">
+                <button id="dot">.</button>
+                <button id="0">0</button>
+                <button id="divide">/</button>
+                <button id="multiply">x</button>
+            </div>
+            <div class="btn-row">
+                <button class="half-row function-btn" id="reset">RESET</button>
+                <button class="half-row equal-btn" id="equal">=</button>
+            </div>
+        </div>
+    </main>
+    <script src="theme-toggle.js"></script>
+    <script src="calculator.js"></script>
+    <script src="appInstall.js"></script>
+</body>
+</html>

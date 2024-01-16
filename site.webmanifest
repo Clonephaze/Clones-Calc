@@ -1,0 +1,43 @@
+{
+    "name": "Calculator | Clonephaze",
+    "short_name": "Calc",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "theme_color": "#3a4764",
+    "background_color": "#3a4764",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "/index.html",
+    "screenshots": [
+        {
+            "src": "/assets/images/Install-Screenshot-mobile.png",
+            "sizes": "499x1080",
+            "type": "image/png",
+            "form-factor": "narrow"
+        },
+        {
+            "src": "/assets/images/Install-Screenshot.png",
+            "sizes": "1920x955",
+            "type": "image/png",
+            "form-factor": "wide"
+        },
+        {
+            "src": "/assets/images/Install-Screenshot2.png",
+            "sizes": "1920x955",
+            "type": "image/png",
+            "form-factor": "wide"
+        }
+    ],
+    "description": "A calculator app, one designed to be clean, simple, and easy to use while being visually appealing. Designed and coded by Clonephaze."
+}

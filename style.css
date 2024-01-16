@@ -1,0 +1,354 @@
+:root {
+
+    /****** Theme variabls, applied to html element and switched via JS ******/
+    &[data-theme="light"] {
+        /** BGs **/
+        --bg-main: 222 26% 31%;
+        --bg-main-sub: 223 31% 20%;
+        --bg-screen: 224 36% 15%;
+        s: #3a4764;
+        /** Keys **/
+        --btn-clr-normal: 30 25% 89%;
+        --btn-clr-normal-hover: 0 0% 100%;
+        --btn-shdw-normal: 28 16% 65%;
+
+        --btn-clr-function: 225 21% 49%;
+        --btn-clr-function-hover: 224 51% 76%;
+        --btn-shdw-function: 224 28% 35%;
+
+        --btn-clr-equal: 6 63% 50%;
+        --btn-clr-equal-hover: 6 93% 67%;
+        --btn-shdw-equal: 6 70% 34%;
+        /** Text **/
+        --body-text: 0 0% 100%;
+        --btn-light-text: 0 0% 100%;
+        --btn-dark-text: 221 14% 31%;
+        --btn-dark-text-equal: 0 0% 100%;
+    }
+
+    &[data-theme="extraLight"] {
+        /** BGs **/
+        --bg-main: 0 0% 90%;
+        --bg-main-sub: 0 5% 81%;
+        --bg-screen: 0 0% 93%;
+        /** Keys **/
+        --btn-clr-normal: 45 7% 89%;
+        --btn-clr-normal-hover: 0 0% 100%;
+        --btn-shdw-normal: 35 11% 61%;
+
+        --btn-clr-function: 185 42% 37%;
+        --btn-clr-function-hover: 185 41% 56%;
+        --btn-shdw-function: 185 58% 25%;
+
+        --btn-clr-equal: 25 98% 40%;
+        --btn-clr-equal-hover: 25 99% 60%;
+        --btn-shdw-equal: 25 99% 27%;
+        /** Text **/
+        --body-text: 60 10% 19%;
+        --btn-light-text: 0 0% 100%;
+        --btn-dark-text: 60 10% 19%;
+        --btn-dark-text-equal: 0 0% 100%;
+    }
+
+    &[data-theme="dark"] {
+        /** BGs **/
+        --bg-main: 268 75% 9%;
+        --bg-main-sub: 268 71% 12%;
+        --bg-screen: 268 71% 12%;
+        /** Keys **/
+        --btn-clr-normal: 268 47% 21%;
+        --btn-clr-normal-hover: 268 54% 44%;
+        --btn-shdw-normal: 290 70% 36%;
+
+        --btn-clr-function: 281 89% 26%;
+        --btn-clr-function-hover: 280 56% 44%;
+        --btn-shdw-function: 285 91% 48%;
+
+        --btn-clr-equal: 176 100% 44%;
+        --btn-clr-equal-hover: 177 100% 79%;
+        --btn-shdw-equal: 177 92% 70%;
+        /** Text **/
+        --body-text: 52 100% 62%;
+        --btn-light-text: 0 0% 100%;
+        --btn-dark-text: 52 100% 62%;
+        --btn-dark-text-equal: 198 20% 13%;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-size: unset;
+    font-weight: unset;
+    line-height: unset;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: color 250ms ease, background-color 250ms ease;
+}
+
+body {
+    font-family: 'League Spartan', sans-serif;
+    background-color: hsl(var(--bg-main));
+    color: hsl(var(--body-text));    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem;
+    margin-top: 5rem;
+    width: min(90%, 500px);
+
+    & h1 {
+        font-size: 2rem;
+        font-weight: 700;
+    }
+}
+
+
+
+/****** Theme Toggle Section ******/
+.theme-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 120px;
+
+    & h2 {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        translate: 0 -0.3em;
+    }
+}
+
+.toggle-container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+
+    >p {
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        width: 35px;
+        font-size: 0.7rem;
+        margin-bottom: 0.5em;
+    }
+}
+
+.theme-toggle {
+    background-color: hsl(var(--bg-main-sub));
+    border-radius: 100vw;
+    width: 55px;
+    height: 21px;
+    position: relative;
+    pointer-events: none;
+}
+
+.theme-toggle input {
+    pointer-events: all;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(0.2em);
+    scale: 1.2;
+}
+
+.theme-toggle input:checked+label {
+    opacity: 1;
+    content: "";
+    width: 25%;
+    aspect-ratio: 1;
+    border-radius: 100vw;
+    inset: 50%;
+    background-color: hsl(var(--btn-clr-equal));
+    z-index: 1;
+    position: absolute;
+    pointer-events: all;
+    cursor: pointer;
+    translate: -52% -54%;
+    transition: transform 200ms ease-in-out, background-color 200ms;
+
+    &[for="theme-toggle-1"] {
+        transform: translate(-100%, 0);
+    }
+
+    &[for="theme-toggle-2"] {
+        transform: translate(0, 0);
+    }
+
+    &[for="theme-toggle-3"] {
+        transform: translate(100%, 0);
+    }
+
+    &:hover {
+        background-color: hsl(var(--btn-clr-equal-hover));
+    }
+}
+
+main {
+    margin-inline: 2rem;
+    width: min(90%, 500px);
+}
+
+.calc-screen {
+    background-color: hsl(var(--bg-screen));
+    border-radius: 10px;
+    padding-block: 0.8em;
+    padding-inline: 0.6em;
+    width: 100%;
+    text-align: end;
+    font-size: 3rem;
+    font-weight: 700;
+    overflow-x: auto;
+}
+
+.button-board {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: hsl(var(--bg-main-sub));
+    border-radius: 10px;
+    padding: 1.2em;
+    gap: 0.5em;
+
+    & button {
+        background-color: hsl(var(--btn-clr-normal));
+        border: none;
+        border-radius: 0.2em;
+        color: hsl(var(--btn-dark-text));
+        cursor: pointer;
+        font-family: inherit;
+        font-size: clamp(1.5rem, 1.3786rem + 0.5178vw, 2rem);
+        font-weight: 700;
+        flex: 0 1 25%;
+        margin: 0.25em;
+        padding: 0.5em;
+        box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-normal)) inset;
+        /* transition: transform 75ms ease-in-out, background-color 250ms ease, color 250ms ease, box-shadow 75ms ease-in-out; */
+
+        &.half-row {
+            flex: 0 1 50%;
+        }
+
+        &:hover {
+            background-color: hsl(var(--btn-clr-normal-hover));
+        }
+
+        &:active {
+            /* transform: translateY(2px);
+            box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-normal)) inset; */
+            animation: buttonPressNormal 125ms ease-in-out;
+        }
+
+        &.function-btn {
+            background-color: hsl(var(--btn-clr-function));
+            box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-function)) inset;
+            color: hsl(var(--btn-light-text));
+
+            &:hover {
+                background-color: hsl(var(--btn-clr-function-hover));
+            }
+            
+            &:active {
+            /* transform: translateY(2px);
+            box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-function)) inset; */
+            animation: buttonPressFunction 125ms ease-in-out;
+            }
+        }
+
+        &.equal-btn {
+            background-color: hsl(var(--btn-clr-equal));
+            box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-equal)) inset;
+            color: hsl(var(--btn-dark-text-equal));
+
+            &:hover {
+                background-color: hsl(var(--btn-clr-equal-hover));
+            }
+            
+            &:active {
+            /* transform: translateY(2px);
+            box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-equal)) inset; */
+            animation: buttonPressEquals 125ms ease-in-out;
+        }
+        }
+    }
+}
+
+.btn-row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+footer {
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 0.5em 1em;
+    font-weight: 600;
+    text-wrap: balance;
+    & a {
+        text-decoration: none;
+        color: hsl(var(--btn-clr-equal));
+    }
+    & a:hover {
+        text-decoration: underline;
+    }
+}
+
+@font-face {
+    font-family: 'League Spartan';
+    src: url(assets/fonts/LeagueSpartan-VariableFont_wght.ttf);
+}
+
+@keyframes buttonPressNormal {
+    0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-normal)) inset;
+    }
+    50% {
+        transform: translateY(2px);
+        box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-normal)) inset;
+    }
+}
+
+@keyframes buttonPressFunction {
+    0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-function)) inset;
+    }
+    50% {
+        transform: translateY(2px);
+        box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-function)) inset;
+    }
+}
+
+@keyframes buttonPressEquals {
+    0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-equal)) inset;
+    }
+    50% {
+        transform: translateY(2px);
+        box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-equal)) inset;
+    }
+}
