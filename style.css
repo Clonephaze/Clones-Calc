@@ -99,7 +99,7 @@ p {
 body {
     font-family: 'League Spartan', sans-serif;
     background-color: hsl(var(--bg-main));
-    color: hsl(var(--body-text));    
+    color: hsl(var(--body-text));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -144,32 +144,28 @@ header {
     align-items: center;
     justify-content: center;
     width: 50px;
-
-    >p {
-        align-self: center;
-        display: flex;
-        justify-content: space-between;
-        width: 35px;
-        font-size: 0.7rem;
-        margin-bottom: 0.5em;
-    }
 }
 
 .theme-toggle {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
     background-color: hsl(var(--bg-main-sub));
     border-radius: 100vw;
     width: 55px;
-    height: 21px;
+    height: 22px;
     position: relative;
     pointer-events: none;
 }
 
 .theme-toggle input {
     pointer-events: all;
+    outline: limegreen solid 2px;
     cursor: pointer;
     opacity: 0;
-    transform: translateY(0.2em);
-    scale: 1.2;
+    height: 1.25rem;
+    width: 100%;
 }
 
 .theme-toggle input:checked+label {
@@ -184,11 +180,11 @@ header {
     position: absolute;
     pointer-events: all;
     cursor: pointer;
-    translate: -52% -54%;
-    transition: transform 200ms ease-in-out, background-color 200ms;
+    translate: -50% -50%;
+    transition: transform 200ms ease-in-out, background-color 250ms ease;
 
     &[for="theme-toggle-1"] {
-        transform: translate(-100%, 0);
+        transform: translate(-110%, 0);
     }
 
     &[for="theme-toggle-2"] {
@@ -196,11 +192,13 @@ header {
     }
 
     &[for="theme-toggle-3"] {
-        transform: translate(100%, 0);
+        transform: translate(110%, 0);
     }
 
-    &:hover {
+    @media (min-width: 768px) {
+      &:hover {
         background-color: hsl(var(--btn-clr-equal-hover));
+    }  
     }
 }
 
@@ -215,19 +213,35 @@ main {
     padding-block: 0.8em;
     padding-inline: 0.6em;
     width: 100%;
+    height: 9rem;
     text-align: end;
     font-size: 3rem;
     font-weight: 700;
-    overflow-x: auto;
     position: relative;
 
     & .whole-opperand {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         position: absolute;
         right: 0;
-        top: 10%;
+        top: 9%;
         translate: -2rem 0;
         opacity: 0.75;
+        max-width: 30ch;
+        overflow-x: auto;
+        text-align: end;
+        scrollbar-width: thin;
+        height: 2.5ch;
+        scrollbar-color: hsl(var(--bg-main)) hsl(var(--bg-screen));
+        text-wrap: nowrap;
+    }
+
+    >span {
+        overflow-x: auto;
+        max-width: 15ch;
+        display: inline-block;
+        translate: 0 0.25em;
+        scrollbar-width: thin;
+        scrollbar-color: hsl(var(--bg-main)) hsl(var(--bg-screen));
     }
 }
 
@@ -243,6 +257,7 @@ main {
     gap: 0.5em;
 
     & button {
+        --_btn-animation-duration: 250ms;
         background-color: hsl(var(--btn-clr-normal));
         border: none;
         border-radius: 0.2em;
@@ -261,29 +276,32 @@ main {
             flex: 0 1 50%;
         }
 
-        &:hover {
-            background-color: hsl(var(--btn-clr-normal-hover));
-        }
-
         &:active {
             /* transform: translateY(2px);
             box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-normal)) inset; */
-            animation: buttonPressNormal 125ms ease-in-out;
+            animation: buttonPressNormal var(--_btn-animation-duration) ease-in-out;
         }
-
+        @media (min-width: 768px) {
+            &:hover {
+                background-color: hsl(var(--btn-clr-normal-hover));
+            }
+        }
+        
         &.function-btn {
             background-color: hsl(var(--btn-clr-function));
             box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-function)) inset;
             color: hsl(var(--btn-light-text));
-
-            &:hover {
-                background-color: hsl(var(--btn-clr-function-hover));
-            }
             
             &:active {
-            /* transform: translateY(2px);
-            box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-function)) inset; */
-            animation: buttonPressFunction 125ms ease-in-out;
+                /* transform: translateY(2px);
+                box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-function)) inset; */
+                animation: buttonPressFunction var(--_btn-animation-duration) ease-in-out;
+            }
+            
+            @media (min-width: 768px) {
+                &:hover {
+                    background-color: hsl(var(--btn-clr-function-hover));
+                }
             }
         }
 
@@ -292,15 +310,17 @@ main {
             box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-equal)) inset;
             color: hsl(var(--btn-dark-text-equal));
 
-            &:hover {
-                background-color: hsl(var(--btn-clr-equal-hover));
-            }
-            
             &:active {
-            /* transform: translateY(2px);
-            box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-equal)) inset; */
-            animation: buttonPressEquals 125ms ease-in-out;
-        }
+                /* transform: translateY(2px);
+                box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-equal)) inset; */
+                animation: buttonPressEquals var(--_btn-animation-duration) ease-in-out;
+            }
+
+            @media (min-width: 768px) {
+                &:hover {
+                    background-color: hsl(var(--btn-clr-equal-hover));
+                }
+            }
         }
     }
 }
@@ -316,12 +336,16 @@ footer {
     padding: 0.5em 1em;
     font-weight: 600;
     text-wrap: balance;
+
     & a {
         text-decoration: none;
         color: hsl(var(--btn-clr-equal));
     }
-    & a:hover {
-        text-decoration: underline;
+
+    @media (min-width: 768px) {
+        & a:hover {
+            text-decoration: underline;
+        }
     }
 }
 
@@ -331,10 +355,13 @@ footer {
 }
 
 @keyframes buttonPressNormal {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
         box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-normal)) inset;
     }
+
     50% {
         transform: translateY(2px);
         box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-normal)) inset;
@@ -342,10 +369,13 @@ footer {
 }
 
 @keyframes buttonPressFunction {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
         box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-function)) inset;
     }
+
     50% {
         transform: translateY(2px);
         box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-function)) inset;
@@ -353,10 +383,13 @@ footer {
 }
 
 @keyframes buttonPressEquals {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
         box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-equal)) inset;
     }
+
     50% {
         transform: translateY(2px);
         box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-equal)) inset;
