@@ -56,6 +56,12 @@
             "sizes": "1920x955",
             "type": "image/png",
             "form_factor": "wide"
+        },
+        {
+            "src": "assets/images/Install-Screenshot3.png",
+            "sizes": "1920x955",
+            "type": "image/png",
+            "form_factor": "wide"
         }
     ],
     "description": "A calculator app, one designed to be clean, simple, and easy to use while being visually appealing. Designed and coded by Clonephaze."
