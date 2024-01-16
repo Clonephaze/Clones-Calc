@@ -40,35 +40,40 @@
         </div>
     </header>
     <main>
-        <div id="screen" class="calc-screen" data-answered="false">0</div>
+        <div class="calc-screen" data-answered="false">
+            <div id="whole-opperand" class="whole-opperand"></div>
+            <span id="screen">0</span>
+        </div>
         <div class="button-board">
             <div class="btn-row">
-                <button id="7">7</button>
-                <button id="8">8</button>
-                <button id="9">9</button>
-                <button class="function-btn" id="delete">DEL</button>
-            </div>
-            <div class="btn-row">
-                <button id="4">4</button>
-                <button id="5">5</button>
-                <button id="6">6</button>
-                <button id="plus">+</button>
+                <button class="function-btn" id="AC">AC</button>
+                <button class="function-btn" id="(">(</button>
+                <button class="function-btn" id=")">)</button>
+                <button class="function-btn" id="+">+</button>
             </div>
             <div class="btn-row">
                 <button id="1">1</button>
                 <button id="2">2</button>
                 <button id="3">3</button>
-                <button id="minus">-</button>
+                <button class="function-btn" id="-">-</button>
             </div>
             <div class="btn-row">
-                <button id="dot">.</button>
+                <button id="4">4</button>
+                <button id="5">5</button>
+                <button id="6">6</button>
+                <button class="function-btn" id="/">/</button>
+            </div>
+            <div class="btn-row">
+                <button id="7">7</button>
+                <button id="8">8</button>
+                <button id="9">9</button>
+                <button class="function-btn" id="multiply">x</button>
+            </div>
+            <div class="btn-row">
+                <button class="function-btn" id="delete">DEL</button>
                 <button id="0">0</button>
-                <button id="divide">/</button>
-                <button id="multiply">x</button>
-            </div>
-            <div class="btn-row">
-                <button class="half-row function-btn" id="reset">RESET</button>
-                <button class="half-row equal-btn" id="equal">=</button>
+                <button id=".">.</button>
+                <button class="equal-btn" id="equal">=</button>
             </div>
         </div>
     </main>

@@ -112,7 +112,7 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 1.5rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
     width: min(90%, 500px);
 
     & h1 {
@@ -140,7 +140,7 @@ header {
 
 .toggle-container {
     display: flex;
-    flex-flow: column;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
     width: 50px;
@@ -219,6 +219,16 @@ main {
     font-size: 3rem;
     font-weight: 700;
     overflow-x: auto;
+    position: relative;
+
+    & .whole-opperand {
+        font-size: 1.25rem;
+        position: absolute;
+        right: 0;
+        top: 10%;
+        translate: -2rem 0;
+        opacity: 0.75;
+    }
 }
 
 .button-board {
