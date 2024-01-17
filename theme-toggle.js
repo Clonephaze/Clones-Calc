@@ -15,21 +15,25 @@ function setTheme() {
     const switchDark = document.getElementById("theme-toggle-3");
 
     if (themeChoice) {
+        var metaTag = document.querySelector('meta[name="theme-color"]');
         switch (themeChoice) {
             case "light": 
                 document.documentElement.setAttribute("data-theme", "light");
+                metaTag.setAttribute("content", "#f1f5f9");
                 switchLight.setAttribute("checked", "checked")
                 switchExtraLight.removeAttribute("checked")
                 switchDark.removeAttribute("checked")
                 break;
             case "extraLight":
                 document.documentElement.setAttribute("data-theme", "extraLight");
+                metaTag.setAttribute("content", "#e6e6e6");
                 switchLight.removeAttribute("checked")
                 switchExtraLight.setAttribute("checked", "checked")
                 switchDark.removeAttribute("checked")
                 break;
             case "dark":
                 document.documentElement.setAttribute("data-theme", "dark");
+                metaTag.setAttribute("content", "#160628");
                 switchLight.removeAttribute("checked")
                 switchExtraLight.removeAttribute("checked")
                 switchDark.setAttribute("checked", "checked")
