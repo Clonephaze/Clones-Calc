@@ -12,11 +12,6 @@ function checkEntry() {
             document.getElementById('screen').innerText = "Hey there!";
             inputSequence = "";
         break;
-        case "420=":
-            console.log("Correct!");
-            document.getElementById('screen').innerText = "Blaze it!";
-            inputSequence = "";
-        break;
         case "022298=":
             console.log("Correct!");
             document.getElementById('screen').innerText = "I love you Ciara!";
@@ -37,6 +32,22 @@ function checkEntry() {
             document.getElementById('screen').innerText = "It's 0! Knock it off!";
             inputSequence = "";
         break;
+        case "993=":
+            console.log("Correct!");
+            document.getElementById('screen').innerText = "Egg";
+            inputSequence = "";
+        break;
+        case "07734=":
+            console.log("Correct!");
+            document.getElementById('screen').innerText = "hELLO";
+            inputSequence = "";
+        break;
+        case "707=":
+            console.log("Correct!");
+            document.getElementById('screen').innerText = "L0L";
+            inputSequence = "";
+        break;
+
         default:
             console.log("Incorrect!");
         break;
