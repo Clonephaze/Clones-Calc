@@ -34,6 +34,7 @@
                     <label for="theme-toggle-2"></label>
                     <input aria-label="Dark Theme" name="theme-switch" type="radio" id="theme-toggle-3" value="dark">
                     <label for="theme-toggle-3"></label>
+                    <span id="toggle-switch"></span>
                 </div>
             </div>
         </div>
@@ -42,39 +43,63 @@
         <div class="calc-screen">
             <div id="whole-opperand" class="whole-opperand" data-contained="false"></div>
             <span id="screen" data-answered="false">0</span>
-            <!-- Will add history and theme buttons <button type="button"></button>
-            <button type="button"></button> -->
+            <button id="history" type="button" data-ignoreButton="true" aria-label="User History" aria-controls="history-board">
+                <svg id="eY2gJ9C43N61" viewBox="0 0 20 20" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" version="1.1" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:svg="http://www.w3.org/2000/svg">
+                    <defs id="defs4" />
+                    <g id="OuterCircle" onclick="" transform="matrix(0.99941995,0,0,0.99971338,-1.9968879,-1.9925987)">
+                        <path style="color:#000000;fill:#000000;stroke-linecap:round;stroke-miterlimit:10;-inkscape-stroke:none;stroke: none;"
+                            d="M 12.962891,2.0488281 C 9.0416114,1.6177568 5.0874033,3.7245184 3.2304688,7.1933594 A 0.75,0.75 0 0 0 3.5390625,8.2089844 0.75,0.75 0 0 0 4.5527344,7.9023437 C 6.1073021,4.9983381 9.5303445,3.1760515 12.806641,3.5390625 l 0.01172,0.00195 h 0.01172 c 3.617372,0.28668 6.878685,3.2522253 7.511719,6.8242185 l 0.002,0.01172 0.002,0.01172 c 0.691534,3.306362 -0.894317,6.979937 -3.755859,8.767578 l -0.0098,0.0059 -0.0078,0.0039 C 13.584352,21.141623 9.2603887,20.861742 6.5507812,18.523437 l -0.00391,-0.0059 -0.00586,-0.0039 C 5.0549691,17.273859 4.0100906,15.500252 3.6542969,13.599609 A 0.75,0.75 0 0 0 2.7792969,13 0.75,0.75 0 0 0 2.1796875,13.875 c 0.4216649,2.252525 1.640372,4.320284 3.3964844,5.787109 3.2482029,2.798683 8.2316631,3.122706 11.8144531,0.759766 C 20.80566,18.284176 22.636451,14.049332 21.814453,10.09375 21.051202,5.8160853 17.295906,2.4000372 12.962891,2.0488281 Z"
+                            id="CirclePath" />
+                        <path style="color:#000000;fill:#000000;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;stroke: none;"
+                            d="m 2.7480469,3 a 0.75,0.75 0 0 0 -0.75,0.75 v 4.5 a 0.750075,0.750075 0 0 0 0.75,0.75 H 7.25 A 0.75,0.75 0 0 0 8,8.25 0.75,0.75 0 0 0 7.25,7.5 H 3.4980469 V 3.75 a 0.75,0.75 0 0 0 -0.75,-0.75 z"
+                            id="Arrow" />
+                    </g>
+                    <g id="ClockHands" style="fill:none;fill-opacity:1;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" transform="matrix(0.99941995,0,0,0.99971338,-1.9968879,-1.9925987)">
+                        <path style="color:#000000;fill:#000000;stroke:none;-inkscape-stroke:none"
+                            d="m 12,6 a 0.75,0.75 0 0 0 -0.75,0.75 v 5.189453 a 0.75,0.75 0 0 0 0.75,0.75 0.75,0.75 0 0 0 0.75,-0.75 V 6.75 A 0.75,0.75 0 0 0 12,6 Z" id="HourHand" />
+                        <path style="color:#000000;fill:#000000;stroke:none;-inkscape-stroke:none"
+                            d="m 12.007813,11.25 a 0.75,0.75 0 0 0 -0.533204,0.214844 0.75,0.75 0 0 0 -0.0098,1.060547 l 3.25,3.310547 a 0.75,0.75 0 0 0 1.060547,0.0098 0.75,0.75 0 0 0 0.0098,-1.060547 l -3.25,-3.310547 A 0.75,0.75 0 0 0 12.007813,11.25 Z"
+                            id="MinuteHand" />
+                    </g>
+                </svg>
+            </button>
         </div>
         <div class="button-board">
-            <div class="btn-row">
-                <button type="button" class="function-btn" id="AC">AC</button>
-                <button type="button" class="function-btn" id="(">(</button>
-                <button type="button" class="function-btn" id=")">)</button>
-                <button type="button" class="function-btn" id="multiply">x</button>
+            <div class="calc-container" id="calc-container">
+                <div class="btn-row">
+                    <button type="button" class="function-btn" id="AC">AC</button>
+                    <button type="button" class="function-btn" id="(">(</button>
+                    <button type="button" class="function-btn" id=")">)</button>
+                    <button type="button" class="function-btn" id="multiply">x</button>
+                </div>
+                <div class="btn-row">
+                    <button type="button" id="7">7</button>
+                    <button type="button" id="8">8</button>
+                    <button type="button" id="9">9</button>
+                    <button type="button" class="function-btn" id="/">/</button>
+                </div>
+                <div class="btn-row">
+                    <button type="button" id="4">4</button>
+                    <button type="button" id="5">5</button>
+                    <button type="button" id="6">6</button>
+                    <button type="button" class="function-btn" id="+">+</button>
+                </div>
+                <div class="btn-row">
+                    <button type="button" id="1">1</button>
+                    <button type="button" id="2">2</button>
+                    <button type="button" id="3">3</button>
+                    <button type="button" class="function-btn" id="-">-</button>
+                </div>
+                <div class="btn-row">
+                    <button type="button" class="function-btn" id="delete">DEL</button>
+                    <button type="button" id="0">0</button>
+                    <button type="button" id=".">.</button>
+                    <button type="button" class="equal-btn" id="equal">=</button>
+                </div>
             </div>
-            <div class="btn-row">
-                <button type="button" id="7">7</button>
-                <button type="button" id="8">8</button>
-                <button type="button" id="9">9</button>
-                <button type="button" class="function-btn" id="/">/</button>
-            </div>
-            <div class="btn-row">
-                <button type="button" id="4">4</button>
-                <button type="button" id="5">5</button>
-                <button type="button" id="6">6</button>
-                <button type="button" class="function-btn" id="+">+</button>
-            </div>
-            <div class="btn-row">
-                <button type="button" id="1">1</button>
-                <button type="button" id="2">2</button>
-                <button type="button" id="3">3</button>
-                <button type="button" class="function-btn" id="-">-</button>
-            </div>
-            <div class="btn-row">
-                <button type="button" class="function-btn" id="delete">DEL</button>
-                <button type="button" id="0">0</button>
-                <button type="button" id=".">.</button>
-                <button type="button" class="equal-btn" id="equal">=</button>
+            <div class="history-board" id="history-board" aria-expanded="false">
+                
             </div>
         </div>
     </main>

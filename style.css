@@ -94,6 +94,7 @@ p {
     margin: 0;
     padding: 0;
     transition: color 250ms ease, background-color 250ms ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -168,7 +169,7 @@ header {
     width: 100%;
 }
 
-.theme-toggle input:checked+label {
+#toggle-switch {
     opacity: 1;
     content: "";
     width: 25%;
@@ -177,29 +178,30 @@ header {
     inset: 50%;
     background-color: hsl(var(--btn-clr-equal));
     z-index: 1;
+    left: 0;
     position: absolute;
     pointer-events: all;
     cursor: pointer;
     translate: -50% -50%;
-    transition: transform 200ms ease-in-out, background-color 250ms ease;
-
-    &[for="theme-toggle-1"] {
-        transform: translate(-110%, 0);
-    }
-
-    &[for="theme-toggle-2"] {
-        transform: translate(0, 0);
-    }
-
-    &[for="theme-toggle-3"] {
-        transform: translate(110%, 0);
-    }
+    transition: left 250ms ease-in-out, background-color 250ms ease;
 
     @media (min-width: 768px) {
-      &:hover {
-        background-color: hsl(var(--btn-clr-equal-hover));
-    }  
+        &:hover {
+            background-color: hsl(var(--btn-clr-equal-hover));
+        }
     }
+}
+
+#theme-toggle-1:checked~#toggle-switch {
+    left: 20%;
+}
+
+#theme-toggle-2:checked~#toggle-switch {
+    left: 50%;
+}
+
+#theme-toggle-3:checked~#toggle-switch {
+    left: 80%;
 }
 
 main {
@@ -243,6 +245,37 @@ main {
         scrollbar-width: thin;
         scrollbar-color: hsl(var(--bg-main)) hsl(var(--bg-screen));
     }
+
+    >#history {
+        background-color: transparent;
+        border: none;
+        width: 24px;
+        aspect-ratio: 1;
+        display: grid;
+        place-items: center;
+        position: absolute;
+        top: 2em;
+        left: 2em;
+        cursor: pointer;
+
+        >svg {
+            width: 75%;
+            height: 75%;
+
+            & path {
+                stroke: hsl(var(--body-text)) !important;
+                fill: hsl(var(--body-text)) !important;
+            }
+
+            & #OuterCircle {
+                transform-origin: 60% 60%;
+            }
+
+            & #MinuteHand {
+                transform-origin: 60% 60%;
+            }
+        }
+    }
 }
 
 .button-board {
@@ -255,8 +288,19 @@ main {
     border-radius: 10px;
     padding: 1.2em;
     gap: 0.5em;
+    position: relative;
+    overflow: hidden;
 
-    & button {
+    >.calc-container {
+        transition: transform 1000ms cubic-bezier(.37, -0.61, .58, 1.4);
+    }
+
+    & .btn-row {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    & .btn-row >button {
         --_btn-animation-duration: 250ms;
         background-color: hsl(var(--btn-clr-normal));
         border: none;
@@ -281,23 +325,24 @@ main {
             box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-normal)) inset; */
             animation: buttonPressNormal var(--_btn-animation-duration) ease-in-out;
         }
+
         @media (min-width: 768px) {
             &:hover {
                 background-color: hsl(var(--btn-clr-normal-hover));
             }
         }
-        
+
         &.function-btn {
             background-color: hsl(var(--btn-clr-function));
             box-shadow: 0 -4px 0 0 hsl(var(--btn-shdw-function)) inset;
             color: hsl(var(--btn-light-text));
-            
+
             &:active {
                 /* transform: translateY(2px);
                 box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-function)) inset; */
                 animation: buttonPressFunction var(--_btn-animation-duration) ease-in-out;
             }
-            
+
             @media (min-width: 768px) {
                 &:hover {
                     background-color: hsl(var(--btn-clr-function-hover));
@@ -325,9 +370,57 @@ main {
     }
 }
 
-.btn-row {
+
+
+.history-board {
+    position: absolute;
+    inset: 50%;
+    width: 100%;
+    height: 100%;
+    translate: -50% -50%;
+    color: black;
+    padding: 0.5em;
     display: flex;
-    justify-content: space-evenly;
+    flex: auto;
+    flex-flow: column nowrap;
+    transform: translateX(100%);
+    transition: transform 1000ms cubic-bezier(.37, -0.61, .58, 1.4);
+    overflow-y: auto;
+    scrollbar-color: hsl(var(--bg-main)/ 0.8) hsl(var(--bg-main-sub));
+    scrollbar-width: thin;
+    
+
+    >button {
+        height: 100%;
+        font: inherit; 
+        background-color: transparent;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        color: hsl(var(--body-text));
+        font-size: 1.5rem;
+        margin-bottom: 0.8em;
+
+        >h3 {
+            font-weight: 700;
+            text-align: end;
+            margin-bottom: 0.5em;
+            padding-right: 0.5em;
+        }
+
+        >p {
+            font-weight: 700;
+            opacity: 0.8;
+            text-align: end;
+            padding-right: 0.8em;
+        }
+
+        @media (min-width: 768px) {
+            &:hover {
+                background-color: hsl(var(--body-text)/ 0.1);
+            }
+        }
+    }
 }
 
 footer {
@@ -394,4 +487,62 @@ footer {
         transform: translateY(2px);
         box-shadow: 0 -2px 0 0 hsl(var(--btn-shdw-equal)) inset;
     }
+}
+
+@keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+
+}
+
+@keyframes rotateReverse {
+    0% {
+        -webkit-transform: translate(-2px, -2px) rotate(0deg);
+        transform: translate(-2px, -2px) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translate(-2px, -2px) rotate(-360deg);
+        transform: translate(-2px, -2px) rotate(-360deg);
+    }
+}
+
+.rotate {
+    -webkit-animation: rotate 750ms cubic-bezier(.37, -0.61, .58, 1.4);
+    animation: rotate 750ms cubic-bezier(.37, -0.61, .58, 1.4);
+}
+
+.counter-rotate {
+    -webkit-animation: rotateReverse 700ms cubic-bezier(.37, -0.61, .58, 1.4);
+    animation: rotateReverse 700ms cubic-bezier(.37, -0.61, .58, 1.4);
+}
+
+@keyframes slide-btns {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slide-history {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.slide-btns {
+    transform: translateX(-120%);
+}
+
+.slide-history {
+    transform: translateX(0);
 }
