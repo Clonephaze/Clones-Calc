@@ -50,9 +50,10 @@ function handleOperation(operation) {
     wholeOperand.setAttribute('data-contained', 'true');
 }
 function calculateResult() {
-    if (mathExpression.length === 0)
+    if (mathExpression.length === 0 && display.innerText === '0')
         return;
-    const fullExpression = mathExpression + display.innerText;
+    let fullExpression = mathExpression + display.innerText;
+    fullExpression = fullExpression.replace(/x/g, '*'); // Replace 'x' with '*' for multiplication
     const regex = /^[\d+\-*/().]+$/;
     if (!regex.test(fullExpression)) {
         display.innerText = 'ERROR';
@@ -106,15 +107,18 @@ function handleButtonClick(e) {
             handleOperation(buttonText);
             break;
         case '(':
+            if (display.innerText !== '0' && !isNaN(Number(display.innerText.slice(-1)))) {
+                mathExpression += display.innerText + '*';
+                wholeOperand.innerText += ' x ';
+            }
             mathExpression += '(';
             wholeOperand.innerText += '(';
+            display.innerText = '0';
             break;
         case ')':
-            if (display.innerText !== '0') {
-                mathExpression += display.innerText + ')';
-                wholeOperand.innerText += ')';
-                display.innerText = '0';
-            }
+            mathExpression += display.innerText + ')';
+            wholeOperand.innerText += display.innerText + ')';
+            display.innerText = '0';
             break;
         case '=':
             calculateResult();
