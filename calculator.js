@@ -83,10 +83,10 @@ buttons.forEach(button => {
                     case 'AC':
                     case 'DEL':
                         // Has these just reset the display
-    display.innerText = '0';
+                        display.innerText = '0';
                         wholeOpperand.innerText = '';
                         inputSequence = '';
-    display.setAttribute('data-answered', 'false');
+                        display.setAttribute('data-answered', 'false');
                         break;
                     default:
                         // All other buttons reset the display and displays the pushed buttons value
@@ -95,9 +95,9 @@ buttons.forEach(button => {
                         wholeOpperand.innerText += e.target.innerText;
                         inputSequence = '';
                         inputSequence += e.target.innerText;
-    display.setAttribute('data-answered', 'false');
+                        display.setAttribute('data-answered', 'false');
                         break;
-}
+                }
                 break;
             // Otherwise, act as normal
             default:
@@ -105,34 +105,34 @@ buttons.forEach(button => {
                     // Defines the normal behavior of all buttons
                     case 'AC':
                         // Resets the display
-    display.innerText = '0';
+                        display.innerText = '0';
                         mathCollection = '';
                         wholeOpperand.innerText = '';
                         wholeOpperand.setAttribute('data-contained', 'false');
                         inputSequence = '';
-            break;
-        case 'DEL':
+                        break;
+                    case 'DEL':
                         // Deletes the last character
                         // Checks if the display would delete the last character, if so sets the display to 0
                         if (display.innerText.length == 1) {
-                display.innerText = '0';
+                            display.innerText = '0';
                             if (display.getAttribute('data-answered') == 'true') {
                                 return;
                             } else {
                                 wholeOpperand.innerText = '';
                                 wholeOpperand.setAttribute('data-contained', 'false');
-            }
+                            }
                         } else {
                             // Otherwise, deletes the last character
-                display.innerText = display.innerText.slice(0, -1);
+                            display.innerText = display.innerText.slice(0, -1);
                             wholeOpperand.innerText = wholeOpperand.innerText.slice(0, -1);
                             inputSequence = inputSequence.slice(0, -1);
-            }
-            break;
-        case '+':
-        case '-':
-        case '/':
-        case 'x':
+                        }
+                        break;
+                    case '+':
+                    case '-':
+                    case '/':
+                    case 'x':
                         // Defines the behavior of the operation buttons
                         // Checks if the display would add an operation right after another operation or if theres no opperand to work with, if so do nothing
                         if (wholeOpperand.getAttribute('data-contained') == 'false' || mathCollection.slice(-1) == operationMap[e.target.innerText]) {
@@ -148,20 +148,20 @@ buttons.forEach(button => {
                             wholeOpperand.innerText += ' ' + e.target.innerText + ' ';
                             wholeOpperand.setAttribute('data-contained', 'true');
                         }
-            break;
-        case ')':
+                        break;
+                    case ')':
                         // Defines the behavior of the closing parenthesis button
                         // Checks if theres no opperand to work with, if so do nothing. Ensures math can't start with a closing parenthesis.
                         if (display.innerText === '0') {
                             return;
                         } else {
                             mathCollection += display.innerText + ')';
-                display.innerText = '0';
+                            display.innerText = '0';
                             wholeOpperand.innerText += e.target.innerText;
                             wholeOpperand.setAttribute('data-contained', 'true')
-            }
-            break;
-        case '=':
+                        }
+                        break;
+                    case '=':
                         // Defines the behavior of the equal button
                         // Checks if theres no opperand to work with, if so do nothing
                         if (mathCollection.length == 0) {
@@ -206,8 +206,8 @@ buttons.forEach(button => {
                                 display.setAttribute('data-answered', 'true');
                             }
                         }
-            break;
-        default:
+                        break;
+                    default:
                         // Defines the behavior of all other buttons
                         // Checks if the display is 0, if so replaces it with the pushed button and adds it to the whole opperand 
                         if (display.innerText === '0') {
@@ -222,11 +222,11 @@ buttons.forEach(button => {
                             wholeOpperand.innerText += e.target.innerText;
                             wholeOpperand.setAttribute('data-contained', 'true')
                             inputSequence += e.target.innerText
-    }
+                        }
                         break;
-}
+                }
                 break;
-}
+        }
     })
 })
 let minuteHand = document.getElementById('MinuteHand');
@@ -236,7 +236,8 @@ let calcContainer = document.getElementById('calc-container');
 function displayHistory() {
     setHistory();
     minuteHand.classList.add('rotate');
-	@@ -241,15 +161,14 @@ function displayHistory() {
+    outerCircle.classList.add('counter-rotate');
+    setTimeout(() => {
         minuteHand.classList.remove('rotate');
         outerCircle.classList.remove('counter-rotate');
     }, 750);
