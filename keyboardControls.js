@@ -44,6 +44,7 @@ window.addEventListener("keydown", function(event) {
             document.getElementById("equal").click();
         break;
         case "Backspace":
+            event.preventDefault();
             document.getElementById("delete").click();
         break;
         case "Escape":
@@ -53,6 +54,7 @@ window.addEventListener("keydown", function(event) {
             document.getElementById("multiply").click();
         break;
         case "/":
+            event.preventDefault();
             document.getElementById("/").click();
         break;
         case "-":
@@ -63,6 +65,12 @@ window.addEventListener("keydown", function(event) {
         break;
         case ".":
             document.getElementById(".").click();
+        break;
+        case "(":
+            document.getElementById("(").click();
+        break;
+        case ")":
+            document.getElementById(")").click();
         break;
     }
 })

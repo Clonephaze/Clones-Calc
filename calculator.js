@@ -1,63 +1,59 @@
 let display = document.getElementById('screen');
 let buttons = Array.from(document.querySelectorAll('button')).filter(button => !button.hasAttribute('data-ignoreButton')); // Makes it ignore the buttons with the data-ignoreButton, like the history button
-let wholeOpperand = document.getElementById('whole-opperand');
+let wholeOperand = document.getElementById('whole-operand');
 let historyContainer = document.getElementById('history-board');
 let mathCollection = '';
 let operationMap = { '+': '+', '-': '-', '/': '/', 'x': '*' }; // Allows the calc to contain "x" and have js see it as "*"
 
-let history = [];
-// Function adds all given answers+the whole opperand to the history
+let calcHistory = [];
+// Function adds all given answers+the whole operand to the history
 function addToHistory(operand, string, answer) {
     if (localStorage.getItem('history')) {
-        history = JSON.parse(localStorage.getItem('history'));
+        calcHistory = JSON.parse(localStorage.getItem('history'));
     }
     let entry = { operand: operand, string: string, answer: answer };
-    history.unshift(entry);
-    if (history.length > 20) {
-        history.pop();
+    calcHistory.unshift(entry);
+    if (calcHistory.length > 20) {
+        calcHistory.pop();
     }
-    localStorage.setItem('history', JSON.stringify(history));
+    localStorage.setItem('history', JSON.stringify(calcHistory));
 }
 
 function setHistory() {
     // Load history from local storage
     if (localStorage.getItem('history')) {
-        history = JSON.parse(localStorage.getItem('history'));
+        calcHistory = JSON.parse(localStorage.getItem('history'));
     } else {
-        localStorage.setItem('history', JSON.stringify(history));
+        localStorage.setItem('history', JSON.stringify(calcHistory));
     }
 
     historyContainer.innerHTML = ''; // Clear the container
-    history.forEach((entry, index) => {
-        // Create a new scope for each iteration
-        (function (entry) {
-            let historyObject = document.createElement('button');
-            historyObject.className = 'history-object';
-            historyObject.setAttribute('data-ignoreButton', 'true');
-            historyObject.id = 'history-object-' + index;
-            let title = document.createElement('h3');
-            title.className = 'history-title';
-            title.id = 'history-title-' + index;
-            title.textContent = entry.operand;
-            let answer = document.createElement('p');
-            answer.className = 'history-answer';
-            answer.id = 'history-answer-' + index;
-            answer.textContent = entry.answer;
-            historyObject.appendChild(title);
-            historyObject.appendChild(answer);
+    calcHistory.forEach((entry, index) => {
+        let historyObject = document.createElement('button');
+        historyObject.className = 'history-object';
+        historyObject.setAttribute('data-ignoreButton', 'true');
+        historyObject.id = 'history-object-' + index;
+        let title = document.createElement('h3');
+        title.className = 'history-title';
+        title.id = 'history-title-' + index;
+        title.textContent = entry.operand;
+        let answer = document.createElement('p');
+        answer.className = 'history-answer';
+        answer.id = 'history-answer-' + index;
+        answer.textContent = entry.answer;
+        historyObject.appendChild(title);
+        historyObject.appendChild(answer);
 
-            // Add an event listener to the button
-            historyObject.addEventListener('click', function () {
-                mathCollection += entry.string;
-                wholeOpperand.innerText = entry.operand.replace(/=/g, '');
-                wholeOpperand.setAttribute('data-contained', 'true');
-                display.setAttribute('data-answered', 'false');
-                display.innerText = '0';
-                displayHistory();
-            });
+        historyObject.addEventListener('click', function () {
+            mathCollection += entry.string;
+            wholeOperand.innerText = entry.operand.replace(/=/g, '');
+            wholeOperand.setAttribute('data-contained', 'true');
+            display.setAttribute('data-answered', 'false');
+            display.innerText = '0';
+            displayHistory();
+        });
 
-            historyContainer.appendChild(historyObject);
-        })(entry);
+        historyContainer.appendChild(historyObject);
     });
 }
 
@@ -84,15 +80,15 @@ buttons.forEach(button => {
                     case 'DEL':
                         // Has these just reset the display
                         display.innerText = '0';
-                        wholeOpperand.innerText = '';
+                        wholeOperand.innerText = '';
                         inputSequence = '';
                         display.setAttribute('data-answered', 'false');
                         break;
                     default:
                         // All other buttons reset the display and displays the pushed buttons value
                         display.innerText = e.target.innerText;
-                        wholeOpperand.innerText = '';
-                        wholeOpperand.innerText += e.target.innerText;
+                        wholeOperand.innerText = '';
+                        wholeOperand.innerText += e.target.innerText;
                         inputSequence = '';
                         inputSequence += e.target.innerText;
                         display.setAttribute('data-answered', 'false');
@@ -107,8 +103,8 @@ buttons.forEach(button => {
                         // Resets the display
                         display.innerText = '0';
                         mathCollection = '';
-                        wholeOpperand.innerText = '';
-                        wholeOpperand.setAttribute('data-contained', 'false');
+                        wholeOperand.innerText = '';
+                        wholeOperand.setAttribute('data-contained', 'false');
                         inputSequence = '';
                         break;
                     case 'DEL':
@@ -119,13 +115,13 @@ buttons.forEach(button => {
                             if (display.getAttribute('data-answered') == 'true') {
                                 return;
                             } else {
-                                wholeOpperand.innerText = '';
-                                wholeOpperand.setAttribute('data-contained', 'false');
+                                wholeOperand.innerText = '';
+                                wholeOperand.setAttribute('data-contained', 'false');
                             }
                         } else {
                             // Otherwise, deletes the last character
                             display.innerText = display.innerText.slice(0, -1);
-                            wholeOpperand.innerText = wholeOpperand.innerText.slice(0, -1);
+                            wholeOperand.innerText = wholeOperand.innerText.slice(0, -1);
                             inputSequence = inputSequence.slice(0, -1);
                         }
                         break;
@@ -134,36 +130,36 @@ buttons.forEach(button => {
                     case '/':
                     case 'x':
                         // Defines the behavior of the operation buttons
-                        // Checks if the display would add an operation right after another operation or if theres no opperand to work with, if so do nothing
-                        if (wholeOpperand.getAttribute('data-contained') == 'false' || mathCollection.slice(-1) == operationMap[e.target.innerText]) {
+                        // Checks if the display would add an operation right after another operation or if theres no operand to work with, if so do nothing
+                        if (wholeOperand.getAttribute('data-contained') == 'false' || mathCollection.slice(-1) == operationMap[e.target.innerText]) {
                             return
-                        } else if (display.innerText == '0' && wholeOpperand.innerText.length == 0) {
-                            //if the display is 0 and it passed the previous if statements, just adds the operation to the whole opperand. Meant for cases like "(3 + 3) x 3", where an operation follows a parenthesis.
+                        } else if (display.innerText == '0' && wholeOperand.innerText.length == 0) {
+                            //if the display is 0 and it passed the previous if statements, just adds the operation to the whole operand. Meant for cases like "(3 + 3) x 3", where an operation follows a parenthesis.
                             mathCollection += operationMap[e.target.innerText];
-                            wholeOpperand.innerText += ' ' + e.target.innerText + ' ';
+                            wholeOperand.innerText += ' ' + e.target.innerText + ' ';
                         } else {
                             // Otherwise, adds the operation and the number to the display
                             mathCollection += display.innerText + operationMap[e.target.innerText];
                             display.innerText = '0';
-                            wholeOpperand.innerText += ' ' + e.target.innerText + ' ';
-                            wholeOpperand.setAttribute('data-contained', 'true');
+                            wholeOperand.innerText += ' ' + e.target.innerText + ' ';
+                            wholeOperand.setAttribute('data-contained', 'true');
                         }
                         break;
                     case ')':
                         // Defines the behavior of the closing parenthesis button
-                        // Checks if theres no opperand to work with, if so do nothing. Ensures math can't start with a closing parenthesis.
+                        // Checks if theres no operand to work with, if so do nothing. Ensures math can't start with a closing parenthesis.
                         if (display.innerText === '0') {
                             return;
                         } else {
                             mathCollection += display.innerText + ')';
                             display.innerText = '0';
-                            wholeOpperand.innerText += e.target.innerText;
-                            wholeOpperand.setAttribute('data-contained', 'true')
+                            wholeOperand.innerText += e.target.innerText;
+                            wholeOperand.setAttribute('data-contained', 'true')
                         }
                         break;
                     case '=':
                         // Defines the behavior of the equal button
-                        // Checks if theres no opperand to work with, if so do nothing
+                        // Checks if theres no operand to work with, if so do nothing
                         if (mathCollection.length == 0) {
                             inputSequence += '=';
                             checkEntry();
@@ -174,25 +170,25 @@ buttons.forEach(button => {
 
                             let regex = /^[\d+\-*/\(\).]+$/;
 
-                            // Checks if the string being passed along is valid math and nothing else. If it fails, sets the display to 'ERROR' and cuts the function before evaluation. Ensures nobody can set the display manually to something malicious and try to evaluate it. ALWAYS BE CAUTIOUS USING EVAL() IN YOUR CODE.
+                            // Validates the expression contains only safe arithmetic characters before evaluating
                             if (!regex.test(mathCollection + display.innerText)) {
                                 display.innerText = 'ERROR';
                                 mathCollection = '';
-                                wholeOpperand.innerText = '';
+                                wholeOperand.innerText = '';
                                 display.setAttribute('data-answered', 'true');
                                 return;
                             }
-                            // Attempts to evaluate the math. If it fails, sets the display to 'ERROR'
+                            // Attempts to evaluate the math using math.js. If it fails, sets the display to 'ERROR'
                             try {
-                                let answer = eval(mathCollection + display.innerText);
-                                // Checks if the string being passed along is a pure number. If not it sets the display to 'ERROR'.
-                                if (typeof answer === 'number') {
+                                let answer = math.evaluate(mathCollection + display.innerText);
+                                // Checks if the result is a finite number. If not, sets the display to 'ERROR'.
+                                if (typeof answer === 'number' && isFinite(answer)) {
                                     let answerStr = answer.toFixed(3);
                                     answerStr = answerStr.replace(/(\.\d+?)0+$/, '$1').replace(/\.$/, '');
                                     answer = parseFloat(answerStr);
                                     display.innerText = answer;
-                                    wholeOpperand.innerText += ' = ';
-                                    addToHistory(wholeOpperand.innerText, mathCollection + lastNumber, answer);
+                                    wholeOperand.innerText += ' = ';
+                                    addToHistory(wholeOperand.innerText, mathCollection + lastNumber, answer);
                                     mathCollection = '';
                                     display.setAttribute('data-answered', 'true');
                                 } else {
@@ -209,18 +205,22 @@ buttons.forEach(button => {
                         break;
                     default:
                         // Defines the behavior of all other buttons
-                        // Checks if the display is 0, if so replaces it with the pushed button and adds it to the whole opperand 
+                        // Prevent adding a second decimal point to the current number
+                        if (e.target.innerText === '.' && display.innerText.includes('.')) {
+                            return;
+                        }
+                        // Checks if the display is 0, if so replaces it with the pushed button and adds it to the whole operand
                         if (display.innerText === '0') {
                             display.innerText = '';
                             display.innerText += e.target.innerText;
-                            wholeOpperand.innerText += e.target.innerText;
-                            wholeOpperand.setAttribute('data-contained', 'true')
+                            wholeOperand.innerText += e.target.innerText;
+                            wholeOperand.setAttribute('data-contained', 'true')
                             inputSequence += e.target.innerText
                         } else {
-                            // Otherwise, adds the pushed button to the display and the whole opperand
+                            // Otherwise, adds the pushed button to the display and the whole operand
                             display.innerText += e.target.innerText;
-                            wholeOpperand.innerText += e.target.innerText;
-                            wholeOpperand.setAttribute('data-contained', 'true')
+                            wholeOperand.innerText += e.target.innerText;
+                            wholeOperand.setAttribute('data-contained', 'true')
                             inputSequence += e.target.innerText
                         }
                         break;
